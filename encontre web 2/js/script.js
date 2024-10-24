@@ -69,7 +69,7 @@ const atualizarCidades = () => {
 
 const setSelectOptions = (selectId, options, defaultText) => {
     const select = document.getElementById(selectId);
-    select.innerHTML = <option value="">${defaultText}</option>; // Limpa opções anteriores
+    select.innerHTML = `<option value="">${defaultText}</option>`; // Limpa opções anteriores
     options.forEach(option => {
         const opt = document.createElement('option');
         opt.value = option;
@@ -92,25 +92,6 @@ const filtrarComercios = () => {
     exibirComercios(filteredComercios);
 };
 
-function acceptCookies() {
-    var d = new Date();
-    d.setTime(d.getTime() + (30*24*60*60*1000)); // 30 dias
-    var expires = "expires=" + d.toUTCString();
-    document.cookie = "cookies_accepted=true;" + expires + ";path=/";
-    document.getElementById('cookie-consent').style.display = 'none';
-    document.getElementById('consent-message').style.display = 'block';
-}
-
-window.onload = function() {
-    if (document.cookie.indexOf("cookies_accepted=true") === -1) {
-        setTimeout(function() {
-            document.getElementById('cookie-consent').style.display = 'flex';
-        }, 1000);
-    } else {
-        document.getElementById('consent-message').style.display = 'block';
-    }
-};
-
 const exibirComercios = (comerciosParaExibir) => {
     const container = document.getElementById('comerciosContainer');
     container.innerHTML = ''; // Limpa o container
@@ -118,13 +99,13 @@ const exibirComercios = (comerciosParaExibir) => {
     if (comerciosParaExibir.length === 0) {
         const mensagemDiv = document.createElement('div');
         mensagemDiv.className = 'mensagem';
-        mensagemDiv.innerHTML = <p>Em Breve Novos Lugares estarão aqui! Volte Mais Tarde.</p>;
+        mensagemDiv.innerHTML = `<p>Em Breve Novos Lugares estarão aqui! Volte Mais Tarde.</p>`;
         container.appendChild(mensagemDiv);
     } else {
         comerciosParaExibir.forEach(comercio => {
             const comercioDiv = document.createElement('div');
             comercioDiv.className = 'comercio-item';
-            comercioDiv.innerHTML = 
+            comercioDiv.innerHTML = `
                 <img src="${comercio.imagem_capa || 'https://via.placeholder.com/300'}" alt="${comercio.nome}" class="comercio-image" />
                 <div class="comercio-header">
                     <h3>${comercio.nome}</h3>
@@ -181,7 +162,7 @@ const exibirComercios = (comerciosParaExibir) => {
                         </div>
                     </div>
                 </div>
-            ;
+            `;
             container.appendChild(comercioDiv);
         });
     }
