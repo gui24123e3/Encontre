@@ -54,6 +54,7 @@ const carregarComercios = async () => {
     }
 };
 
+
 const atualizarCidades = () => {
     const selectedEstado = document.getElementById('estado').value;
     const cidadesFiltradas = [...new Set(comercios
@@ -61,12 +62,14 @@ const atualizarCidades = () => {
         .map(comercio => comercio.cidade))];
 
     setSelectOptions('cidade', cidadesFiltradas, 'Selecione a Cidade');
+
+    // Atualiza comercios ao mudar o estado
     filtrarComercios();
 };
 
 const setSelectOptions = (selectId, options, defaultText) => {
     const select = document.getElementById(selectId);
-    select.innerHTML = `<option value="">${defaultText}</option>`; // Limpa opções anteriores
+    select.innerHTML = <option value="">${defaultText}</option>; // Limpa opções anteriores
     options.forEach(option => {
         const opt = document.createElement('option');
         opt.value = option;
@@ -91,26 +94,21 @@ const filtrarComercios = () => {
 
 function acceptCookies() {
     var d = new Date();
-    d.setTime(d.getTime() + (30 * 24 * 60 * 60 * 1000)); // 30 dias
+    d.setTime(d.getTime() + (30*24*60*60*1000)); // 30 dias
     var expires = "expires=" + d.toUTCString();
     document.cookie = "cookies_accepted=true;" + expires + ";path=/";
     document.getElementById('cookie-consent').style.display = 'none';
     document.getElementById('consent-message').style.display = 'block';
 }
 
-const mostrarPopupConsentimento = () => {
+window.onload = function() {
     if (document.cookie.indexOf("cookies_accepted=true") === -1) {
-        setTimeout(() => {
+        setTimeout(function() {
             document.getElementById('cookie-consent').style.display = 'flex';
         }, 1000);
     } else {
         document.getElementById('consent-message').style.display = 'block';
     }
-};
-
-window.onload = function() {
-    mostrarPopupConsentimento();
-    carregarComercios();
 };
 
 const exibirComercios = (comerciosParaExibir) => {
@@ -120,13 +118,13 @@ const exibirComercios = (comerciosParaExibir) => {
     if (comerciosParaExibir.length === 0) {
         const mensagemDiv = document.createElement('div');
         mensagemDiv.className = 'mensagem';
-        mensagemDiv.innerHTML = `<p>Em Breve Novos Lugares estarão aqui! Volte Mais Tarde.</p>`;
+        mensagemDiv.innerHTML = <p>Em Breve Novos Lugares estarão aqui! Volte Mais Tarde.</p>;
         container.appendChild(mensagemDiv);
     } else {
         comerciosParaExibir.forEach(comercio => {
             const comercioDiv = document.createElement('div');
             comercioDiv.className = 'comercio-item';
-            comercioDiv.innerHTML = `
+            comercioDiv.innerHTML = 
                 <img src="${comercio.imagem_capa || 'https://via.placeholder.com/300'}" alt="${comercio.nome}" class="comercio-image" />
                 <div class="comercio-header">
                     <h3>${comercio.nome}</h3>
@@ -171,15 +169,21 @@ const exibirComercios = (comerciosParaExibir) => {
                                 </a>
                             </div>
                             <div class="icon-container">
-                                <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(comercio.cidade)}" target="_blank">
-                                    <img src="./img/icons8-localização-50.png" alt="Localização" class="icon" />
+                                <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(comercio.cidade || 'localização não disponível')}" target="_blank">
+                                    <img src="./img/icons8-google-maps-novo-48.png" alt="Maps" class="icon" />
+                                </a>
+                            </div>
+                            <div class="icon-container">
+                                <a href="${comercio.link_site_pessoal || '#'}" target="_blank">
+                                    <img src="./img/icons8-internet-50.png" alt="Site Pessoal" class="icon" />
                                 </a>
                             </div>
                         </div>
                     </div>
                 </div>
-            `;
+            ;
             container.appendChild(comercioDiv);
         });
     }
 };
+window.onload = carregarComercios;
