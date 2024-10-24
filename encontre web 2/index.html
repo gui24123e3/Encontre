@@ -8,8 +8,6 @@
     <link rel="icon" href="./img/logoencontre.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="./js/script.js"></script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1183660196592298"
-     crossorigin="anonymous"></script>
       <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-HNY9CT2RY7"></script>
     <script>
@@ -35,45 +33,44 @@
             <div class="row" style="display: flex; flex-wrap: wrap; justify-content: center;">
                 <select id="categoria" onchange="filtrarComercios()">
                     <option value="">Todas as Categorias</option>
-                    <option value="academia">Academia</option>
-                    <option value="agencia de viagens">Agência de Viagens</option>
-                    <option value="açaiteria">Açaiteria</option>
-                    <option value="atelie">Ateliê</option>
-                    <option value="bar">Bar</option>
-                    <option value="cafeteria">Cafeteria</option>
-                    <option value="cafeteria vegana">Cafeteria Vegana</option>
-                    <option value="centro cultural">Centro Cultural</option>
-                    <option value="centro esportivo">Centro Esportivo</option>
-                    <option value="cinema">Cinema</option>
-                    <option value="clube">Clube</option>
-                    <option value="clinica de estetica">Clínica de Estética</option>
-                    <option value="comercio">Comércio</option>
-                    <option value="evento">Evento</option>
-                    <option value="espaco coworking">Espaço Coworking</option>
-                    <option value="estudio de fotografia">Estúdio de Fotografia</option>
-                    <option value="estudio de yoga">Estúdio de Yoga</option>
-                    <option value="farmacia">Farmácia</option>
-                    <option value="feira de artesanato">Feira de Artesanato</option>
-                    <option value="igreja">Igreja</option>
-                    <option value="lanchonete">Lanchonete</option>
-                    <option value="livraria">Livraria</option>
-                    <option value="loja de brinquedos">Loja de Brinquedos</option>
-                    <option value="loja de moveis">Loja de Móveis</option>
-                    <option value="loja de roupas">Loja de Roupas</option>
-                    <option value="mecanica">Mecânica</option>
-                    <option value="mercado">Mercado</option>
                     <option value="pizzaria">Pizzaria</option>
-                    <option value="pet shop">Pet Shop</option>
-                    <option value="ponto turistico">Ponto Turístico</option>
-                    <option value="pousadas e hoteis">Pousadas e Hotéis</option>
+                    <option value="lanchonete">Lanchonete</option>
                     <option value="restaurante">Restaurante</option>
-                    <option value="restaurante vegetariano">Restaurante Vegetariano</option>
-                    <option value="salão de beleza">Salão de Beleza</option>
-                    <option value="serviços de beleza">Serviços de Beleza</option>
-                    <option value="seguros">Seguros</option>
+                    <option value="igreja">Igreja</option>
+                    <option value="comercio">Comércio</option>
+                    <option value="ponto turistico">Ponto Turístico</option>
                     <option value="sorveteria">Sorveteria</option>
+                    <option value="açaiteria">Açaiteria</option>
                     <option value="shopping">Shopping</option>
+                    <option value="evento">Evento</option>
+                    <option value="cinema">Cinema</option>
+                    <option value="academia">Academia</option>
+                    <option value="pet shop">Pet Shop</option>
+                    <option value="cafeteria">Cafeteria</option>
+                    <option value="bar">Bar</option>
+                    <option value="livraria">Livraria</option>
+                    <option value="serviços de beleza">Serviços de Beleza</option>
+                    <option value="centro cultural">Centro Cultural</option>
+                    <option value="restaurante vegetariano">Restaurante Vegetariano</option>
+                    <option value="cervejaria">Cervejaria</option>
+                    <option value="atelie">Ateliê</option>
+                    <option value="salao de beleza">Salão de Beleza</option>
+                    <option value="farmacia">Farmácia</option>
+                    <option value="estudio de fotografia">Estúdio de Fotografia</option>
+                    <option value="casa de shows">Casa de Shows</option>
+                    <option value="escola de musica">Escola de Música</option>
+                    <option value="clinica de estetica">Clínica de Estética</option>
+                    <option value="estudio de yoga">Estúdio de Yoga</option>
+                    <option value="espaco coworking">Espaço Coworking</option>
+                    <option value="centro esportivo">Centro Esportivo</option>
+                    <option value="loja de roupas">Loja de Roupas</option>
+                    <option value="loja de brinquedos">Loja de Brinquedos</option>
+                    <option value="cafeteria vegana">Cafeteria Vegana</option>
+                    <option value="empreendimentos sustentaveis">Empreendimentos Sustentáveis</option>
+                    <option value="loja de moveis">Loja de Móveis</option>
+                    <option value="agencia de viagens">Agência de Viagens</option>
                     <option value="terapias alternativas">Terapias Alternativas</option>
+                    <option value="pousadas e hoteis">Pousadas e Hotéis</option>
                 </select>
                 <select id="estado" onchange="filtrarComercios()">
                     <option value="">Selecione o Estado</option>
@@ -87,10 +84,13 @@
                 <i class="fas fa-search"></i> Filtrar
             </button>
     <div id="loadingMessage" style="display: none; position: fixed; top: 80%; left: 50%; transform: translate(-50%, -50%); text-align: center; font-size: 18px;"></div>
+
+
             
             <div id="comerciosContainer"></div>
         </header>
-            <div id="cookie-consent" class="modal">
+    </div>
+    <div id="cookie-consent" class="modal">
         <div class="modal-content">
             <p>Utilizamos cookies essenciais e tecnologias semelhantes de acordo com a nossa 
                 <a href="https://politicadeprivacidadeencontre.vercel.app/politicadeprivacidadeencontre.html" target="_blank">Política de Privacidade</a> 
@@ -98,7 +98,5 @@
             <button onclick="acceptCookies()">Aceitar</button>
         </div>
     </div>
-    </div>
-
 </body>
 </html>
