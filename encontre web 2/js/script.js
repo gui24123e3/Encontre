@@ -92,6 +92,21 @@ const filtrarComercios = () => {
     exibirComercios(filteredComercios);
 };
 
+window.onload = function() {
+    mostrarPopupConsentimento();
+    carregarComercios();
+};
+
+const mostrarPopupConsentimento = () => {
+    if (document.cookie.indexOf("cookies_accepted=true") === -1) {
+        setTimeout(() => {
+            document.getElementById('cookie-consent').style.display = 'flex';
+        }, 1000);
+    } else {
+        document.getElementById('consent-message').style.display = 'block';
+    }
+};
+
 const exibirComercios = (comerciosParaExibir) => {
     const container = document.getElementById('comerciosContainer');
     container.innerHTML = ''; // Limpa o container
