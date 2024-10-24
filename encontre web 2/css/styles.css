@@ -236,5 +236,25 @@ select:focus {
 .titulo-com-icone .icon {
   margin-right: 8px; /* Espaçamento entre o ícone e o texto */
 }
+/* CSS para o pop-up de consentimento */
+.modal {
+    display: none; /* Escondido por padrão */
+    position: fixed; /* Fixa na tela */
+    top: 0;
+    left: 0;
+    width: 100%; /* Largura total */
+    height: 100%; /* Altura total */
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente */
+    justify-content: center; /* Centraliza o conteúdo */
+    align-items: center; /* Centraliza verticalmente */
+    z-index: 1000; /* Acima de outros elementos */
+}
+
+.modal-content {
+    background-color: white; /* Fundo branco */
+    padding: 20px; /* Espaçamento interno */
+    border-radius: 10px; /* Bordas arredondadas */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Sombra */
+}
 
 
