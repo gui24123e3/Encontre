@@ -54,7 +54,6 @@ const carregarComercios = async () => {
     }
 };
 
-
 const atualizarCidades = () => {
     const selectedEstado = document.getElementById('estado').value;
     const cidadesFiltradas = [...new Set(comercios
@@ -62,8 +61,6 @@ const atualizarCidades = () => {
         .map(comercio => comercio.cidade))];
 
     setSelectOptions('cidade', cidadesFiltradas, 'Selecione a Cidade');
-
-    // Atualiza comercios ao mudar o estado
     filtrarComercios();
 };
 
@@ -174,13 +171,8 @@ const exibirComercios = (comerciosParaExibir) => {
                                 </a>
                             </div>
                             <div class="icon-container">
-                                <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(comercio.cidade || 'localização não disponível')}" target="_blank">
-                                    <img src="./img/icons8-google-maps-novo-48.png" alt="Maps" class="icon" />
-                                </a>
-                            </div>
-                            <div class="icon-container">
-                                <a href="${comercio.link_site_pessoal || '#'}" target="_blank">
-                                    <img src="./img/icons8-internet-50.png" alt="Site Pessoal" class="icon" />
+                                <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(comercio.cidade)}" target="_blank">
+                                    <img src="./img/icons8-localização-50.png" alt="Localização" class="icon" />
                                 </a>
                             </div>
                         </div>
@@ -191,4 +183,3 @@ const exibirComercios = (comerciosParaExibir) => {
         });
     }
 };
-window.onload = carregarComercios;
