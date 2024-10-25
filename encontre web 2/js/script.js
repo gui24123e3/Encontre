@@ -134,7 +134,7 @@ const exibirComercios = (comerciosParaExibir) => {
                         <p class="info-item">Estado: ${comercio.estado || 'Não disponível'}</p>
                         <p class="info-item">Telefone: ${comercio.telefone || 'Não disponível'}</p>
                         <p class="info-item">Endereço: ${comercio.horario_funcionamento_feriados || 'Não disponível'}</p>
-                        <p class="info-item">Horário de Funcionamento ${comercio.horario_funcionamento || 'Não disponível'}</p>
+                        <p class="info-item">Horário ${comercio.horario_funcionamento || 'Não disponível'}</p>
                     </div>
                 </div>
                 <div class="descricao-container">
