@@ -165,8 +165,8 @@ const exibirComercios = (comerciosParaExibir) => {
                                 </a>
                             </div>
                             <div class="icon-container">
-                                <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(comercio.cidade || 'localização não disponível')}" target="_blank">
-                                    <img src="./img/icons8-google-maps-novo-48.png" alt="Maps" class="icon" />
+                                <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(comercio.horario_funcionamento || 'Horário de funcionamento não disponível')}" target="_blank">
+                                    <img src="./img/icons8-google-maps-novo-48.png" alt="Horário" class="icon" />
                                 </a>
                             </div>
                             <div class="icon-container">
