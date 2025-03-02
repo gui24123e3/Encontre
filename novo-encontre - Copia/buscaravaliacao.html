@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalhes de Comercios</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet"> <!-- Link para os ícones -->
+  <style>
+    body {
+      background-color: #f8f9fa;
+      padding-top: 20px;
+    }
+    .container {
+      max-width: 1200px;
+      background: #fff;
+      padding: 120px;
+      margin: auto;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+    h1, h2 {
+      text-align: center;
+      color: #343a40;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #007bff;
+      padding-bottom: 10px;
+    }
+    .table th {
+      background-color: #007bff;
+      color: white;
+      text-align: center;
+    }
+    .table td {
+      text-align: center;
+      vertical-align: middle;
+    }
+    .position-image {
+      width: 40px;
+      height: 40px;
+    }
+    /* Estilização dos cards do ranking */
+    .ranking-card {
+      transition: transform 0.2s;
+    }
+    .ranking-card:hover {
+      transform: scale(1.05);
+    }
+    .ranking-icon {
+      width: 80px;
+      height: auto;
+    }
+    .logo {
+      display: block;
+      margin: 0 auto 20px;
+      width: 120px; /* Ajuste conforme necessário */
+    }
+    /* Header aprimorado */
+    .header {
+      width: 100%;
+      background: linear-gradient(135deg, rgba(0, 119, 255, 0.65), rgba(0, 0, 0, 0.85));
+      backdrop-filter: blur(6px);
+      padding: 15px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+    }
+  
+    /* Estado escondido */
+    .header.hide-header {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+  
+    .header.show-header {
+      position: fixed;
+      transform: translateY(0);
+      opacity: 1;
+    }
+  
+    /* Logo e Nome */
+    .header-logo {
+        display: flex;
+        align-items: center;
+    }
+  
+    .header-icon {
+        width: 50px;
+        height: auto;
+        margin-right: 40px;
+    }
+  
+    /* Estilos para o logo fora do container */
+    .logo-container {
+        text-align: center; /* Centraliza o logo horizontalmente */
+        margin-top: 80px; /* Adiciona margem superior para espaçamento */
+    }
+  
+    .logo-container img {
+        width: 100px; /* Ajuste o tamanho do logo conforme necessário */
+        height: auto;
+    }
+  
+    .header-text {
+      font-size: 1.2em;
+      font-weight: 200;
+      color: #ffffff;
+      font-family: sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+  
+    /* Botões de Navegação */
+    .header-buttons {
+      display: flex;
+      gap: 20px;
+    }
+  
+    .header-buttons button {
+      background-color: transparent;
+      border: 2px solid #ffffff;
+      padding: 10px 25px;
+      border-radius: 25px;
+      font-size: 1em;
+      color: #ffffff;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+    }
+  
+    .header-buttons button:hover {
+      background-color: #ffffff;
+      color: #000000;
+      transform: translateY(-3px);
+    }
+  
+    /* Botão de Menu (Hamburger) - inicialmente oculto */
+    .menu-toggle {
+      display: none;
+      background: transparent;
+      border: none;
+      color: #ffffff;
+      font-size: 1.2em;
+      cursor: pointer;
+    }
+  
+    /* Responsividade - telas até 768px */
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+  
+      /* Esconde os botões de navegação e os posiciona como dropdown */
+      .header-buttons {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        background-color: rgba(0, 0, 0, 0.9);
+        padding: 10px 0;
+      }
+  
+      /* Quando a classe 'show' for adicionada, exibe o menu */
+      .header-buttons.show {
+        display: flex;
+      }
+  
+      .header-buttons button {
+        margin: 5px auto;
+        width: 90%;
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <!-- Header fixo -->
+  <div class="header">
+    <div class="header-logo">
+      <img src="./img/web_hi_res_512.png" alt="Logo" class="header-icon" />
+      <span class="header-text">Encontre        </span>
+    </div>
+    <!-- Botão de menu no canto direito -->
+    <button class="menu-toggle" onclick="toggleMenu()">
+      <i class="fas fa-bars"></i>
+    </button>
+    <!-- Botões de navegação (dropdown em mobile) -->
+    <div class="header-buttons">
+      <button onclick="window.location.href='index.html'">Início</button>
+      <button onclick="window.location.href='avaliecomercio.html'">Avalie um comércio</button>
+      <button onclick="window.location.href='gasolina.html'">Gasolina inteligente</button>
+      <button onclick="window.location.href='privacidade.html'">Privacidade encontre</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <img src="./img/1lugar.png" class="logo" alt="Logo Encontre">
+    <h1>Encontre awards</h1>
+    
+    <!-- Seção de Ranking dos Top 3 Comercios -->
+    <div id="rankingContainer" class="mb-4"></div>
+    
+    <!-- Seção de Ranking dos Top 3 Avaliadores -->
+    <div id="rankingUsersContainer" class="mb-4"></div>
+    
+    <div class="table-responsive">
+      <table class="table table-hover" id="mergedTable">
+        <thead>
+          <tr>
+            <th>Posição</th>
+            <th>Comércio</th>
+            <th>Nota</th>
+            <th>Horário de pico</th>
+            <th>Valor Gasto</th>
+            <th>Cidade</th>
+            <th>Endereço</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-logo">
+          <img src="./img/web_hi_res_512.png" alt="Logo">
+          <span>Encontre Tecnologia</span>
+        </div>
+      </div>
+      <hr>
+      <div class="footer-links">
+        <div class="footer-section">
+          <strong>SOBRE NÓS</strong>
+          <a href="#">Nossa empresa</a>
+          <a href="#">História</a>
+        </div>
+        <div class="footer-section">
+          <strong>PRECISA DE AJUDA?</strong>
+          <a href="#">Contate-nos</a>
+        </div>
+        <div class="footer-section">
+          <strong>LEGAL</strong>
+          <a href="#">Termos de uso</a>
+          <a href="#">Política de privacidade</a>
+        </div>
+        <div class="footer-section">
+          <strong>REDES SOCIAIS</strong>
+          <div class="social-icons">
+            <a href="https://www.instagram.com"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.linkedin.com"><i class="fab fa-linkedin"></i></a>
+            <a href="https://twitter.com"><i class="fab fa-x-twitter"></i></a>
+            <a href="https://www.tiktok.com"><i class="fab fa-tiktok"></i></a>
+            <a href="https://www.youtube.com"><i class="fab fa-youtube"></i></a>
+            <a href="https://www.facebook.com"><i class="fab fa-facebook-square"></i></a>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <p>&copy; 2025 The Encontre Tecnologia Company. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+  
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Busca e exibe os detalhes dos comércios
+      fetch('https://encontreoficialback.azurewebsites.net/all-businesses-details')
+        .then(response => response.json())
+        .then(data => {
+          // Ordena os dados: maior nota_media primeiro; em caso de empate, menor valor gasto
+          data.sort((a, b) => {
+            const notaA = parseFloat(a.nota_media) || 0;
+            const notaB = parseFloat(b.nota_media) || 0;
+            if (notaB !== notaA) {
+              return notaB - notaA;
+            }
+            const gastoA = a.menor_valor_gasto === null ? Infinity : parseFloat(a.menor_valor_gasto);
+            const gastoB = b.menor_valor_gasto === null ? Infinity : parseFloat(b.menor_valor_gasto);
+            return gastoA - gastoB;
+          });
+  
+          // Seção de Ranking dos Top 3 Comercios com Cards
+          const rankingContainer = document.getElementById('rankingContainer');
+          const topThree = data.slice(0, 3);
+          if (topThree.length > 0) {
+            let rankingHTML = `
+              <h2 class="mb-4">Ranking dos Top 3 Comercios</h2>
+              <div class="row">
+            `;
+            topThree.forEach((item, index) => {
+              let iconSrc = '';
+              if (index === 0) {
+                iconSrc = './img/vencedora.png';
+              } else if (index === 1) {
+                iconSrc = './img/2lugar.png';
+              } else if (index === 2) {
+                iconSrc = './img/3lugar.png';
+              }
+              let rating = item.total_avaliacoes > 0 ? parseFloat(item.nota_media).toFixed(1) : '-';
+              rankingHTML += `
+                <div class="col-md-4 mb-3">
+                  <div class="card ranking-card">
+                    <div class="card-body text-center">
+                      <img src="${iconSrc}" class="ranking-icon mb-3" alt="${index+1}º Lugar">
+                      <h5 class="card-title">${index+1}º Lugar</h5>
+                      <p class="card-text"><strong>${item.comercio_nome}</strong><br>Nota: ${rating}</p>
+                    </div>
+                  </div>
+                </div>
+              `;
+            });
+            rankingHTML += `</div>`;
+            rankingContainer.innerHTML = rankingHTML;
+          }
+  
+          // Preenche a tabela completa com os detalhes de cada comércio
+          const tbody = document.getElementById('mergedTable').querySelector('tbody');
+          tbody.innerHTML = '';
+          data.forEach((item, index) => {
+            const tr = document.createElement('tr');
+            const position = index + 1;
+            let positionContent = position;
+            
+            // Exibe ícones para os 3 primeiros lugares
+            if (position === 1) {
+              positionContent = '<img src="./img/vencedora.png" class="position-image" alt="1º lugar">';
+            } else if (position === 2) {
+              positionContent = '<img src="./img/2lugar.png" class="position-image" alt="2º lugar">';
+            } else if (position === 3) {
+              positionContent = '<img src="./img/3lugar.png" class="position-image" alt="3º lugar">';
+            } else {
+              // Ícone genérico para outras posições (usando um ícone de estrela)
+              positionContent = '<img src="./img/5lugar.png" class="position-image" alt="3º lugar">'
+            }
+  
+            // Exibe apenas os dois primeiros horários de pico
+            let horarios = '-';
+            if (item.horario_pico) {
+              const arr = item.horario_pico.split(',').map(h => h.trim());
+              horarios = arr.slice(0, 2).join(', ');
+            }
+  
+            tr.innerHTML = `
+              <td>${positionContent}</td>
+              <td>${item.comercio_nome}</td>
+              <td>${item.total_avaliacoes > 0 ? parseFloat(item.nota_media).toFixed(1) : '-'}</td>
+              <td>${horarios}</td>
+              <td>${item.menor_valor_gasto !== null ? 'R$ ' + parseFloat(item.menor_valor_gasto).toFixed(2) : '-'}</td>
+              <td>${item.cidade || '-'}</td>
+              <td>${item.endereco 
+                ? `<button class="btn btn-primary" onclick="window.open('https://www.google.com/maps/search/${encodeURIComponent(item.endereco)}', '_blank')"><i class="bi bi-geo-alt"></i>Mapa</button>`
+                : '-'}</td>
+            `;
+            tbody.appendChild(tr);
+          });
+        })
+        .catch(error => console.error("Erro ao buscar dados dos comercios:", error));
+  
+      // Busca e exibe o ranking dos avaliadores (pessoas que mais fizeram avaliações)
+      fetch('https://encontreoficialback.azurewebsites.net/all-users-details')
+        .then(response => response.json())
+        .then(users => {
+          // Ordena os usuários: os que mais fizeram avaliações primeiro
+          users.sort((a, b) => b.total_avaliacoes - a.total_avaliacoes);
+  
+          // Seção de Ranking dos Top 3 Avaliadores com Cards
+          const rankingUsersContainer = document.getElementById('rankingUsersContainer');
+          const topThreeUsers = users.slice(0, 3);
+          if (topThreeUsers.length > 0) {
+            let rankingUsersHTML = `
+              <h2 class="mb-4">Ranking dos Top 3 Avaliadores</h2>
+              <div class="row">
+            `;
+            topThreeUsers.forEach((user, index) => {
+              let iconSrc = '';
+              if (index === 0) {
+                iconSrc = './img/1lugar.png';
+              } else if (index === 1) {
+                iconSrc = './img/2lugar.png';
+              } else if (index === 2) {
+                iconSrc = './img/3lugar.png';
+              }
+              rankingUsersHTML += `
+                <div class="col-md-4 mb-3">
+                  <div class="card ranking-card">
+                    <div class="card-body text-center">
+                      <img src="${iconSrc}" class="ranking-icon mb-3" alt="${index+1}º Lugar">
+                      <h5 class="card-title">${index+1}º Lugar</h5>
+                      <p class="card-text"><strong>${user.usuario_nome}</strong><br>Total de Avaliações: ${user.total_avaliacoes}</p>
+                    </div>
+                  </div>
+                </div>
+              `;
+            });
+            rankingUsersHTML += `</div>`;
+            rankingUsersContainer.innerHTML = rankingUsersHTML;
+          }
+        })
+        .catch(error => console.error("Erro ao buscar dados dos usuários:", error));
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+    const audio = document.getElementById("backgroundMusic");
+    audio.volume = 0.5; // Define o volume (0.0 a 1.0)
+    
+    // Para garantir a reprodução automática em alguns navegadores
+    document.body.addEventListener("click", function () {
+      if (audio.paused) {
+        audio.play();
+      }
+    });
+  });
+  </script>
+</body>
+</html>

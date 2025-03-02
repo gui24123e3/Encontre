@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buscar Avaliações</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f1f3f4;
+    }
+    .container {
+      background: white;
+      width: 500px;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    h2 {
+      font-size: 22px;
+      margin-bottom: 15px;
+      color: #202124;
+    }
+    input, select {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      border: 1px solid #dfe1e5;
+      border-radius: 24px;
+      font-size: 16px;
+      outline: none;
+      transition: all 0.3s ease-in-out;
+    }
+    input:focus, select:focus {
+      border-color: #4285f4;
+      box-shadow: 0 0 5px rgba(66, 133, 244, 0.3);
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 24px;
+      font-size: 16px;
+      font-weight: bold;
+      background-color: #4285f4;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background-color: #357ae8;
+    }
+    .business-item {
+      background: #fff;
+      padding: 10px;
+      border-radius: 12px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      margin-top: 10px;
+      text-align: left;
+    }
+    .business-item strong {
+      font-size: 18px;
+      color: #202124;
+    }
+    .business-item p {
+      font-size: 14px;
+      color: #5f6368;
+    }
+    .business-item img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Buscar Avaliações</h2>
+  
+  <!-- Input para Nome do Comércio -->
+  <input type="text" id="comercio-search" placeholder="Digite o nome do comércio">
+  
+  <!-- Select para Categoria -->
+  <select id="categoria">
+    <option value="Todos">Todos</option>
+    <option value="Restaurante">Restaurante</option>
+    <option value="Supermercado">Supermercado</option>
+    <!-- Outras categorias podem ser adicionadas -->
+  </select>
+  
+  <button onclick="searchBusiness()">Buscar</button>
+  
+  <div id="business-list"></div>
+  
+  <!-- Área para exibir os dados completos do comércio -->
+  <div id="business-details"></div>
+</div>
+
+<script>
+// Função para buscar comércios pelo nome e categoria
+function searchBusiness() {
+  const searchTerm = document.getElementById('comercio-search').value;
+  const categoria = document.getElementById('categoria').value;
+  let url = 'https://encontreoficialback.azurewebsites.net/search-business?';
+  
+  // Construa a URL com base nos parâmetros
+  if (searchTerm) {
+    url += `nome=${encodeURIComponent(searchTerm)}`;
+  }
+  if (categoria && categoria !== 'Todos') {
+    url += `&categoria=${encodeURIComponent(categoria)}`;
+  }
+  
+  // Executa a busca se houver termo com pelo menos 3 caracteres ou se a categoria for diferente de "Todos"
+  if (searchTerm.length >= 3 || categoria !== 'Todos') {
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        const businessList = document.getElementById('business-list');
+        businessList.innerHTML = '';
+        // Limpa detalhes anteriores
+        document.getElementById('business-details').innerHTML = '';
+        if (data.message) {
+          businessList.innerHTML += `<p>${data.message}</p>`;
+        } else {
+          data.forEach((item) => {
+            const div = document.createElement('div');
+            div.classList.add('business-item');
+            div.innerHTML = `
+              <strong>${item.nome}</strong>
+              <p>Categoria: ${item.categoria}</p>
+              <p>Endereço: ${item.endereco}</p>
+              <p><strong>Foto:</strong></p>
+              <img src="${item.imagem_capa}" alt="Imagem do comércio">
+              <button onclick="showBusinessDetails('${item.nome}')">Ver Detalhes</button>
+            `;
+            businessList.appendChild(div);
+          });
+        }
+      })
+      .catch((error) => {
+        console.error('Erro ao buscar comércios:', error);
+      });
+  }
+}
+
+// Função para exibir os dados completos do comércio
+function showBusinessDetails(nome) {
+  fetch(`https://encontreoficialback.azurewebsites.net/get-business-details?nome=${encodeURIComponent(nome)}`)
+    .then((response) => response.json())
+    .then((data) => {
+      const detailsDiv = document.getElementById('business-details');
+      detailsDiv.innerHTML = `
+        <h3>Detalhes do Comércio</h3>
+        <div class="business-item">
+          <strong>${data.nome}</strong>
+          <p><strong>Categoria:</strong> ${data.categoria}</p>
+          <p><strong>Endereço:</strong> ${data.endereco}</p>
+          <p><strong>Cidade:</strong> ${data.cidade || 'N/D'}</p>
+          <p><strong>Estado:</strong> ${data.estado || 'N/D'}</p>
+          <p><strong>Telefone:</strong> ${data.telefone || 'N/D'}</p>
+          <p><strong>Horário de Funcionamento:</strong> ${data.horario_funcionamento || 'N/D'}</p>
+          <p><strong>Horário Feriados:</strong> ${data.horario_funcionamento_feriados || 'N/D'}</p>
+          <p><strong>Descrição:</strong> ${data.descricao || 'N/D'}</p>
+          <p><strong>Facebook:</strong> ${data.link_facebook ? `<a href="${data.link_facebook}" target="_blank">${data.link_facebook}</a>` : 'N/D'}</p>
+          <p><strong>Instagram:</strong> ${data.link_instagram ? `<a href="${data.link_instagram}" target="_blank">${data.link_instagram}</a>` : 'N/D'}</p>
+          <p><strong>Site:</strong> ${data.link_site_pessoal ? `<a href="${data.link_site_pessoal}" target="_blank">${data.link_site_pessoal}</a>` : 'N/D'}</p>
+          <img src="${data.imagem_capa}" alt="Imagem do comércio">
+        </div>
+      `;
+    })
+    .catch((error) => {
+      console.error('Erro ao carregar os detalhes do comércio:', error);
+      document.getElementById('business-details').innerHTML = '<p>Erro ao carregar os detalhes do comércio.</p>';
+    });
+}
+</script>
+
+</body>
+</html>

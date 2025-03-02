@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Comércio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .form-container {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .form-container label {
+            font-size: 16px;
+            color: #333;
+            margin-top: 10px;
+        }
+        .form-container input, .form-container textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .form-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .form-container button:hover {
+            background-color: #218838;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Cadastro de Comércio</h1>
+
+<div class="form-container">
+    <form id="comercioForm" enctype="multipart/form-data">
+        <label for="nome">Nome do Comércio</label>
+        <input type="text" id="nome" name="nome" required>
+
+        <label for="descricao">Descrição</label>
+        <textarea id="descricao" name="descricao" required></textarea>
+
+        <label for="imagem">Imagem do Comércio</label>
+        <input type="file" id="imagem" name="imagem" accept="image/*" required>
+
+        <button type="submit">Cadastrar Comércio</button>
+        <div class="error" id="error-message"></div>
+    </form>
+</div>
+
+<script>
+    document.getElementById('comercioForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const formData = new FormData();
+        formData.append('nome', document.getElementById('nome').value);
+        formData.append('descricao', document.getElementById('descricao').value);
+        formData.append('imagem', document.getElementById('imagem').files[0]);
+
+        fetch('/api/cadastrar-comercio', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Comércio cadastrado com sucesso!');
+                document.getElementById('comercioForm').reset();
+            } else {
+                document.getElementById('error-message').textContent = data.message || 'Ocorreu um erro.';
+            }
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+            document.getElementById('error-message').textContent = 'Erro ao cadastrar o comércio. Tente novamente.';
+        });
+    });
+</script>
+
+</body>
+</html>

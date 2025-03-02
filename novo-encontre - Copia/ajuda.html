@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ajuda e Dúvidas Frequentes</title>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* Reset e estilos básicos */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    html, body {
+      width: 100%;
+      min-height: 100vh; /* Garante que a tela ocupe toda a altura */
+      overflow-x: hidden; /* Previne barras de rolagem desnecessárias */
+    }
+    
+    /* Define o body como container flex para empurrar o footer para baixo */
+    body {
+      display: flex;
+      flex-direction: column;
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      text-align: center;
+    }
+
+    /* Header fixo */
+    .header {
+      width: 100%;
+      max-width: 100vw;
+      background: linear-gradient(135deg, rgba(0, 119, 255, 0.65), rgba(0, 0, 0, 0.85));
+      backdrop-filter: blur(6px);
+      padding: 15px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+    }
+
+    /* Logo e Nome */
+    .header-logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .header-icon {
+      width: 50px;
+      height: auto;
+      margin-right: 12px;
+    }
+
+    .header-text {
+      font-size: 1.5em;
+      font-weight: bold;
+      color: #ffffff;
+      text-transform: uppercase;
+    }
+
+    /* Botões de Navegação */
+    .header-buttons {
+      display: flex;
+      gap: 15px;
+    }
+
+    .header-buttons button {
+      background-color: transparent;
+      border: 2px solid #ffffff;
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-size: 1em;
+      color: #ffffff;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .header-buttons button:hover {
+      background-color: #ffffff;
+      color: #000000;
+      transform: translateY(-3px);
+    }
+
+    /* Botão de Menu (Hamburger) */
+    .menu-toggle {
+      display: none;
+      background: transparent;
+      border: none;
+      color: #ffffff;
+      font-size: 1.5em;
+      cursor: pointer;
+    }
+
+    /* Responsividade */
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      .header-buttons {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.9);
+        padding: 10px 0;
+        width: 100vw;
+      }
+
+      .header-buttons.show {
+        display: flex;
+      }
+
+      .header-buttons button {
+        width: 100%;
+        text-align: center;
+      }
+    }
+
+    /* Estilos para o main e a FAQ */
+    main {
+      flex: 1;
+      padding-top: 150px; /* Compensa o header fixo */
+    }
+
+    .faq-section {
+      padding: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .faq-section h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    .faq details {
+      background: #fff;
+      margin-bottom: 10px;
+      padding: 15px 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      cursor: pointer;
+    }
+
+    .faq details summary {
+      font-weight: bold;
+      list-style: none;
+      outline: none;
+      position: relative;
+      padding-right: 25px;
+    }
+
+    .faq details summary::after {
+      content: "▼";
+      position: absolute;
+      right: 0;
+      top: 0;
+      font-size: 1em;
+    }
+
+    .faq details[open] summary::after {
+      content: "▲";
+    }
+
+    .faq details p {
+      margin-top: 10px;
+      padding-left: 10px;
+      color: #555;
+    }
+
+    /* Footer sempre no final */
+    footer {
+      width: 100%;
+      background: linear-gradient(135deg, rgba(0, 119, 255, 0.607), rgb(0, 0, 0));
+      color: white;
+      padding: 40px 20px;
+      margin-top: auto; /* Empurra o footer para o final */
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header fixo -->
+  <div class="header">
+    <div class="header-logo">
+      <img src="./img/web_hi_res_512.png" alt="Logo" class="header-icon">
+      <span class="header-text">Ajuda e FAQ</span>
+    </div>
+    
+    <button class="menu-toggle" onclick="toggleMenu()">
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="header-buttons">
+      <button onclick="window.location.href='index.html'">Início</button>
+    </div>
+  </div>
+
+  <!-- Conteúdo principal -->
+  <main>
+    <section class="faq-section">
+      <h1>Perguntas Frequentes</h1>
+      <div class="faq">
+        <details>
+          <summary>Como posso criar uma conta?</summary>
+          <p>Para criar uma conta, clique em "Registrar" no canto superior direito e siga as instruções.</p>
+        </details>
+        <details>
+          <summary>Esqueci minha senha, o que devo fazer?</summary>
+          <p>Clique em "Esqueci minha senha" na página de login e siga as instruções para recuperar sua conta.</p>
+        </details>
+        <details>
+          <summary>Como posso contatar o suporte?</summary>
+          <p>Você pode enviar um e-mail para <strong>suporte@exemplo.com</strong> ou utilizar o formulário de contato na seção "Contate-nos".</p>
+        </details>
+        <details>
+          <summary>Como atualizo minhas informações pessoais?</summary>
+          <p>Faça login em sua conta, acesse o painel de configurações e atualize as informações desejadas.</p>
+        </details>
+        <details>
+          <summary>O que fazer se encontrar um erro no site?</summary>
+          <p>Por favor, reporte o problema através do nosso formulário de contato ou envie um e-mail para <strong>suporte@exemplo.com</strong>.</p>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div style="width: 100%; margin: 0 auto; display: flex; flex-direction: column; align-items: center;">
+      <div style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
+        <div style="display: flex; align-items: center;">
+          <img src="./img/web_hi_res_512.png" alt="Logo" style="height: 30px; margin-right: 10px;">
+          <span style="font-weight: 300; font-size: 1.2em;">Encontre Tecnologia</span>
+        </div>
+      </div>
+      <hr style="width: 100%; border: 0.5px solid white; margin: 20px 0;">
+      <div style="width: 100%; display: flex; justify-content: space-between; flex-wrap: wrap;">
+        <div style="display: flex; flex-direction: column; margin-bottom: 20px;">
+          <strong>SOBRE NÓS</strong>
+          <a href="#" style="color: white; text-decoration: none; margin-bottom: 5px;">Nossa empresa</a>
+          <a href="#" style="color: white; text-decoration: none; margin-bottom: 5px;">História</a>
+        </div>
+        <div style="display: flex; flex-direction: column; margin-bottom: 20px;">
+          <strong>PRECISA DE AJUDA?</strong>
+          <a href="#" style="color: white; text-decoration: none; margin-bottom: 5px;">Contate-nos</a>
+        </div>
+        <div style="display: flex; flex-direction: column; margin-bottom: 20px;">
+          <strong>LEGAL</strong>
+          <a href="#" style="color: white; text-decoration: none; margin-bottom: 5px;">Termos de uso</a>
+          <a href="#" style="color: white; text-decoration: none; margin-bottom: 5px;">Política de privacidade</a>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: flex-end; margin-bottom: 20px;">
+          <strong>REDES SOCIAIS</strong>
+          <div style="display: flex; gap: 10px; justify-content: flex-start; flex-wrap: wrap;">
+            <a href="https://www.instagram.com" style="color: white;"><i class="fab fa-instagram" style="font-size: 1.5em;"></i></a>
+            <a href="https://www.linkedin.com" style="color: white;"><i class="fab fa-linkedin" style="font-size: 1.5em;"></i></a>
+            <a href="https://twitter.com" style="color: white;"><i class="fab fa-x-twitter" style="font-size: 1.5em;"></i></a>
+            <a href="https://www.tiktok.com" style="color: white;"><i class="fab fa-tiktok" style="font-size: 1.5em;"></i></a>
+            <a href="https://www.youtube.com" style="color: white;"><i class="fab fa-youtube" style="font-size: 1.5em;"></i></a>
+            <a href="https://www.facebook.com" style="color: white;"><i class="fab fa-facebook-square" style="font-size: 1.5em;"></i></a>
+          </div>
+        </div>
+      </div>
+      <hr style="width: 100%; border: 0.5px solid white; margin: 20px 0;">
+      <p style="font-size: 0.9em;">&copy; 2025 The Encontre Tecnologia Company. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      document.querySelector('.header-buttons').classList.toggle('show');
+    }
+  </script>
+</body>
+</html>

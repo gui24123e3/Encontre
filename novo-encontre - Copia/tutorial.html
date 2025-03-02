@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Abrir em Nova Aba</title>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* Reset e estilos básicos */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    html, body {
+      width: 100%;
+      min-height: 100vh; /* Garante que a tela ocupe toda a altura */
+      overflow-x: hidden; /* Previne barras de rolagem desnecessárias */
+    }
+    
+    /* Define o body como container flex para empurrar o footer para baixo */
+    body {
+      display: flex;
+      flex-direction: column;
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      text-align: center;
+    }
+
+    /* Header fixo */
+    .header {
+      width: 100%;
+      max-width: 100vw;
+      background: linear-gradient(135deg, rgba(0, 119, 255, 0.65), rgba(0, 0, 0, 0.85));
+      backdrop-filter: blur(6px);
+      padding: 15px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+    }
+
+    /* Logo e Nome */
+    .header-logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .header-icon {
+      width: 50px;
+      height: auto;
+      margin-right: 12px;
+    }
+
+    .header-text {
+      font-size: 1.5em;
+      font-weight: bold;
+      color: #ffffff;
+      text-transform: uppercase;
+    }
+
+    /* Botões de Navegação */
+    .header-buttons {
+      display: flex;
+      gap: 15px;
+    }
+
+    .header-buttons button {
+      background-color: transparent;
+      border: 2px solid #ffffff;
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-size: 1em;
+      color: #ffffff;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .header-buttons button:hover {
+      background-color: #ffffff;
+      color: #000000;
+      transform: translateY(-3px);
+    }
+
+    /* Botão de Menu (Hamburger) */
+    .menu-toggle {
+      display: none;
+      background: transparent;
+      border: none;
+      color: #ffffff;
+      font-size: 1.5em;
+      cursor: pointer;
+    }
+
+    /* Responsividade */
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      .header-buttons {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.9);
+        padding: 10px 0;
+        width: 100vw;
+      }
+
+      .header-buttons.show {
+        display: flex;
+      }
+
+      .header-buttons button {
+        width: 100%;
+        text-align: center;
+      }
+    }
+
+    h1 {
+      color: #333;
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+    }
+
+    .image-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 15px;
+      justify-items: center;
+      padding: 20px;
+      max-width: 100%;
+    }
+
+    .image-container img {
+      width: 100%;
+      max-width: 830px;
+      aspect-ratio: 830 / 430;
+      object-fit: cover;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .image-container img:hover {
+      transform: scale(1.05);
+    }
+
+    /* Container dos botões */
+    .button-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-top: 20px;
+      padding: 20px;
+    }
+
+    .button-container button {
+      background-color: #2196F3;
+      color: white;
+      padding: 12px 25px;
+      font-size: 16px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      width: 100%;
+      max-width: 220px;
+      transition: background 0.3s ease;
+    }
+
+    .button-container button:hover {
+      background-color: #1e88e5;
+    }
+
+    #back-to-form-button {
+      background-color: #4CAF50;
+    }
+
+    #back-to-form-button:hover {
+      background-color: #388E3C;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      .button-container {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .button-container button {
+        max-width: 90%;
+      }
+    }
+    
+    /* Estilos do main para compensar o header fixo */
+    main {
+      flex: 1;
+      padding-top: 150px; /* Garante que o conteúdo não fique atrás do header */
+    }
+
+    /* Footer sempre no final */
+    footer {
+      width: 100%;
+      background: linear-gradient(135deg, rgba(0, 119, 255, 0.607), rgb(0, 0, 0));
+      color: white;
+      padding: 40px 20px;
+      margin-top: auto; /* Empurra o footer para o final */
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header fixo -->
+  <div class="header">
+    <div class="header-logo">
+      <img src="./img/web_hi_res_512.png" alt="Logo" class="header-icon">
+      <span class="header-text"> Ajuda</span>
+    </div>
+    
+    <button class="menu-toggle" onclick="toggleMenu()">
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="header-buttons">
+      <button onclick="window.location.href='index.html'">Início</button>
+    </div>
+  </div>
+
+  <!-- Conteúdo principal -->
+  <main>
+    <h1>Como Adicionar Fotos Do Seu Comércio?</h1>
+
+    <div id="image-container" class="image-container">
+      <img src="./img/imagepasso1.png" alt="Imagem 1">
+      <img src="./img/imagepasso2.png" alt="Imagem 2">
+      <img src="./img/Captura de tela 2025-02-23 221929.png" alt="Imagem 3">
+    </div>
+
+    <div class="button-container">
+      <button id="back-to-form-button">Voltar para o Formulário</button>
+      <button id="go-to-site-button">Ir para o Site</button>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div style="width: 100%; margin: 0 auto; display: flex; flex-direction: column; align-items: center;">
+      <div style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
+        <div style="display: flex; align-items: center;">
+          <img src="./img/web_hi_res_512.png" alt="Logo" style="height: 30px; margin-right: 10px;">
+          <span style="font-weight: 300; font-size: 1.2em;">Encontre Tecnologia</span>
+        </div>
+      </div>
+      <hr style="width: 100%; border: 0.5px solid white; margin: 20px 0;">
+      <div style="width: 100%; display: flex; justify-content: space-between; flex-wrap: wrap;">
+        <div style="display: flex; flex-direction: column; margin-bottom: 20px;">
+          <strong>SOBRE NÓS</strong>
+          <a href="#" style="color: white; text-decoration: none; margin-bottom: 5px;">Nossa empresa</a>
+          <a href="#" style="color: white; text-decoration: none; margin-bottom: 5px;">História</a>
+        </div>
+        <div style="display: flex; flex-direction: column; margin-bottom: 20px;">
+          <strong>PRECISA DE AJUDA?</strong>
+          <a href="#" style="color: white; text-decoration: none; margin-bottom: 5px;">Contate-nos</a>
+        </div>
+        <div style="display: flex; flex-direction: column; margin-bottom: 20px;">
+          <strong>LEGAL</strong>
+          <a href="#" style="color: white; text-decoration: none; margin-bottom: 5px;">Termos de uso</a>
+          <a href="#" style="color: white; text-decoration: none; margin-bottom: 5px;">Política de privacidade</a>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: flex-end; margin-bottom: 20px;">
+          <strong>REDES SOCIAIS</strong>
+          <div style="display: flex; gap: 10px; justify-content: flex-start; flex-wrap: wrap;">
+            <a href="https://www.instagram.com" style="color: white;"><i class="fab fa-instagram" style="font-size: 1.5em;"></i></a>
+            <a href="https://www.linkedin.com" style="color: white;"><i class="fab fa-linkedin" style="font-size: 1.5em;"></i></a>
+            <a href="https://twitter.com" style="color: white;"><i class="fab fa-x-twitter" style="font-size: 1.5em;"></i></a>
+            <a href="https://www.tiktok.com" style="color: white;"><i class="fab fa-tiktok" style="font-size: 1.5em;"></i></a>
+            <a href="https://www.youtube.com" style="color: white;"><i class="fab fa-youtube" style="font-size: 1.5em;"></i></a>
+            <a href="https://www.facebook.com" style="color: white;"><i class="fab fa-facebook-square" style="font-size: 1.5em;"></i></a>
+          </div>
+        </div>
+      </div>
+      <hr style="width: 100%; border: 0.5px solid white; margin: 20px 0;">
+      <p style="font-size: 0.9em;">&copy; 2025 The Encontre Tecnologia Company. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('go-to-site-button').addEventListener('click', function() {
+      window.open('https://postimages.org/', '_blank');
+    });
+
+    document.getElementById('back-to-form-button').addEventListener('click', function() {
+      window.location.href = 'encontrenegocio1.html';
+    });
+
+    function toggleMenu() {
+      document.querySelector('.header-buttons').classList.toggle('show');
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <title>Postos Baratos</title>
+  <script src="./js/gasolina.js" defer></script>
+  <link rel="stylesheet" href="./css/gasolina.css">
+</head>
+<body>
+  <!-- Header com Botões de Navegação -->
+  <header>
+    <div class="header-logo">
+      <img src="./img/web_hi_res_512.png" alt="Logo" class="header-icon" />
+      <span class="header-text">Encontre</span>
+    </div>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    <div class="header-buttons">
+      <button onclick="window.location.href='index.html'">Home</button>
+      <button onclick="window.location.href='privacidade.html'">Privacidade encontre</button>
+    </div>
+  </header>
+  <h1></h1>
+  <h2>Cadastrar Postos ⛽</h2>
+  <div class="container">
+    
+    
+
+ 
+    <form id="add-fuel-price-form">
+      <input type="text" id="nome" placeholder="Nome do posto" required>
+      <input type="text" id="endereco" placeholder="Endereço" required>
+      <input type="text" id="tipo_combustivel" placeholder="Tipo de Combustível" required>
+      <input type="number" step="0.01" id="preco" placeholder="Preço (R$)" required>
+      <input type="text" id="cidade" placeholder="Cidade" required>
+      <input type="text" id="estado" placeholder="Estado" required>
+      <button type="submit">Cadastrar</button>
+      <div>
+        <input type="text" id="filter-cidade" placeholder="Filtrar por cidade" />
+        <input type="text" id="filter-estado" placeholder="Filtrar por estado" />
+        <button onclick="filterFuelPrices()">Filtrar</button>
+      </div>
+    </form>
+    <div class="table-container">
+      <table id="fuel-list">
+        <thead>
+          <tr>
+            <th>Nome do Posto</th>
+            <th>Endereço</th>
+            <th>Tipo de Combustível ⛽</th>
+            <th>Cidade</th>
+            <th>Estado</th>
+            <th>Preço</th>
+            <th>novo preço</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div> <!-- Fechamento da .container -->
+
+  <!-- Footer -->
+  <footer>
+    <div style="width: 100%; margin: 0 auto; display: flex; flex-direction: column; align-items: center;">
+      <div style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
+        <div style="display: flex; align-items: center;">
+          <img src="./img/web_hi_res_512.png" alt="Logo" style="height: 30px; margin-right: 10px;">
+          <span style="font-weight: 300; font-size: 1.2em;">Encontre Tecnologia</span>
+        </div>
+      </div>
+      <hr style="width: 100%; border: 0.5px solid white; margin: 20px 0;">
+      <div style="width: 100%; display: flex; justify-content: space-between; flex-wrap: wrap;">
+        <div style="display: flex; flex-direction: column; margin-bottom: 20px;">
+          <strong>SOBRE NÓS</strong>
+          <a href="sobre.html" style="color: white; text-decoration: none; margin-bottom: 5px;">Nossa empresa</a>
+          <a href="historia.html" style="color: white; text-decoration: none; margin-bottom: 5px;">História</a>
+
+        </div>
+        <div style="display: flex; flex-direction: column; margin-bottom: 20px;">
+          <strong>PRECISA DE AJUDA?</strong>
+          <a href="contato.html" style="color: white; text-decoration: none; margin-bottom: 5px;">Contate-nos</a>
+        </div>
+        <div style="display: flex; flex-direction: column; margin-bottom: 20px;">
+          <strong>LEGAL</strong>
+          <a href="termos.html" style="color: white; text-decoration: none; margin-bottom: 5px;">Termos de uso</a>
+          <a href="privacidade.html" style="color: white; text-decoration: none; margin-bottom: 5px;">Política de privacidade</a>
+        </div>
+      <hr style="width: 100%; border: 0.5px solid white; margin: 20px 0;">
+      <p style="font-size: 0.9em;">&copy; 2025 The Encontre Tecnologia Company. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+</div>
+
+
+</body>
+</html>
